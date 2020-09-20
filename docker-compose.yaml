@@ -1,0 +1,38 @@
+version: "3.8"
+
+services:
+    webapp:
+        build: ./services/infrastructure/webapp
+        volumes: 
+            - ./services/infrastructure/webapp:/app
+        ports: 
+            - "8082:80"
+
+    operation-eval:
+        build: ./services/model/evaluation
+        volumes:
+            - ./services/model/evaluation:/app
+        ports:
+            - "8083:80"
+
+    operation-sum:
+        build: ./services/model/sum
+        volumes: 
+            - ./services/model/sum:/app
+
+    operation-sub:
+        build: ./services/model/sub
+        volumes: 
+            - ./services/model/sub:/app
+
+    operation-div:
+        build: ./services/model/div
+        volumes: 
+            - ./services/model/div:/app
+
+    operation-mult:
+        build: ./services/model/mult
+        volumes: 
+            - ./services/model/mult:/app
+            
+
