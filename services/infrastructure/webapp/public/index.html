@@ -1,0 +1,62 @@
+<html>
+<header>
+    <style>
+        body{
+            background: rgba(0,0,0,0.25);
+            font-family: roboto, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            align-content: center;
+        }
+        
+        div {
+            display:flex;
+            flex-direction: column;
+            margin-top: 50px;
+            padding: 10px;
+            background: rgba(0,0,0,0.1);
+            width: 50%;
+            color: white;
+        }
+
+        input {
+            margin: 1%;
+            padding: 5px;
+        }
+
+        input[type=text] {
+            font-size: 1.2em;
+
+        }
+    </style>
+</header>
+<body>
+    <div>
+        <h2>Calculator</h2>
+        <input type="text" id='query' placeholder="Expression (e.g. 1 + 2)">
+        <button onclick="send()">Calculate</button>
+        <p id="calculation-return"></p>
+    </div>
+
+    
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>    
+    <script>
+        function send(){
+
+            var q = $('#query').val();
+            q = q.replace(/\s+/g, '');
+            q = q.replace(/\//g, 'd');
+
+            $.ajax({
+                type: "GET",
+                url: "http://localhost:8083/" + q,
+                success: function(d) {
+                    console.log(d);
+                    $("#calculation-return").text("Calculation result: " + d.data.result)
+                }
+            })
+        }
+    </script>    
+</body>
+</html>
